@@ -4,12 +4,14 @@
     Время O(n + p), доп. память – O(p).
     p <= 30000, n <= 300000."
  Time O(|pattern| + |text|)
- Memory O(|pattern| + |text|)
+ Memory O(|pattern|)
  */
 
 #include <iostream>
 #include <string>
 #include <vector>
+
+const char SPECIAL_SYMBOL = '#';  // Unused as a symbol in pattern/text
 
 std::vector<size_t> OccurrenceIdx(size_t pattern_length,
         const std::string& text);
@@ -17,8 +19,6 @@ std::vector<size_t> OccurrenceIdx(size_t pattern_length,
 std::vector<size_t> PrefixFunction(const std::string& text);
 
 int main() {
-    const char SPECIAL_SYMBOL = '#';  // Unused as a symbol in pattern/text
-
     std::string pattern, text;
 
     std::cin >> pattern;

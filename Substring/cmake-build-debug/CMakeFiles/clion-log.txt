@@ -1,4 +1,4 @@
-/home/vladimir/.local/share/JetBrains/Toolbox/apps/CLion/ch-1/192.6262.62/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=/usr/bin/c++ -G "CodeBlocks - Unix Makefiles" /home/vladimir/CLionProjects/Substring
+/home/vladimir/.local/share/JetBrains/Toolbox/apps/CLion/ch-1/192.6262.62/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=/usr/bin/c++ -G "CodeBlocks - Unix Makefiles" "/home/vladimir/CLionProjects/Algorithms course/Algorithms/Substring"
 -- The C compiler identification is GNU 7.3.0
 -- The CXX compiler identification is GNU 7.3.0
 -- Check for working C compiler: /usr/bin/cc
@@ -15,4 +15,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/vladimir/CLionProjects/Substring/cmake-build-debug
+-- Build files have been written to: /home/vladimir/CLionProjects/Algorithms course/Algorithms/Substring/cmake-build-debug

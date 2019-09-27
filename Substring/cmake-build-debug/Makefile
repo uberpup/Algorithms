@@ -48,10 +48,10 @@ RM = /home/vladimir/.local/share/JetBrains/Toolbox/apps/CLion/ch-1/192.6262.62/b
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vladimir/CLionProjects/Substring
+CMAKE_SOURCE_DIR = "/home/vladimir/CLionProjects/Algorithms course/Algorithms/Substring"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vladimir/CLionProjects/Substring/cmake-build-debug
+CMAKE_BINARY_DIR = "/home/vladimir/CLionProjects/Algorithms course/Algorithms/Substring/cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vladimir/CLionProjects/Substring/cmake-build-debug/CMakeFiles /home/vladimir/CLionProjects/Substring/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/vladimir/CLionProjects/Algorithms course/Algorithms/Substring/cmake-build-debug/CMakeFiles" "/home/vladimir/CLionProjects/Algorithms course/Algorithms/Substring/cmake-build-debug/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vladimir/CLionProjects/Substring/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/vladimir/CLionProjects/Algorithms course/Algorithms/Substring/cmake-build-debug/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
