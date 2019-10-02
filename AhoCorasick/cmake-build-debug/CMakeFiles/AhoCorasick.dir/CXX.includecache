@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vladimir/CLionProjects/AhoCorasick/main.cpp
+iostream
+-
+vector
+-
+unordered_set
+-
+utility
+-
+queue
+-
+deque
+-
+
