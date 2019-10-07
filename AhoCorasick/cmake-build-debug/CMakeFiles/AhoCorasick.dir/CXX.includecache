@@ -6,17 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/vladimir/CLionProjects/AhoCorasick/main.cpp
-iostream
--
-vector
--
-unordered_set
--
-utility
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/AhoCorasick/main.cpp
+deque
 -
 queue
 -
-deque
+iostream
+-
+map
+-
+memory
+-
+string
+-
+vector
 -
 
