@@ -11,7 +11,7 @@
     log#Sigma - const, так что условие по требуемому времени не нарушается
  Память: O(m)
  */
-
+#pragma GCC optimize("Ofast,unroll-all-loops")
 #include <deque>
 #include <queue>
 #include <iostream>
@@ -38,7 +38,6 @@ public:
         ~BohrNode() = default;
     };
     std::vector<std::pair<std::string, size_t>> wordlist;  // Строка и расстояние до начала
-    // В случае вопросов в конце добавим фиктивную строку
     size_t pattern_size;
     std::shared_ptr<BohrNode> root;
 
@@ -53,13 +52,15 @@ public:
 
 int main() {
     std::string pattern;
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
     std::cin >> pattern;
     Bohr bohr(pattern.length());
 
     size_t last_char = 0;
     size_t divider_count = 0;
     for (size_t i = 0; i < pattern.length(); ++i) {
-        if (pattern[i] == DIVIDER) {  // Отдебажить бы
+        if (pattern[i] == DIVIDER) {
             if (last_char != i) {
                 bohr.AddPattern(pattern.substr(last_char, i - last_char),
                         divider_count);
@@ -73,13 +74,14 @@ int main() {
             divider_count = 0;
         }
     }
-    if (divider_count) {  // Случай с вопросами в конце
-        bohr.AddPattern("", divider_count);
-    }
     bohr.Init();
 
     std::string text;
     std::cin >> text;
+    if (divider_count) {  // Зачищаем вопросы в конце
+        text = text.substr(0, text.length() - divider_count);
+        bohr.pattern_size -= divider_count;
+    }
     auto result = bohr.PatternSearch(text);
     for (size_t i = 0; i < result.size(); ++i) {
         std::cout << result[i] << " ";
@@ -123,11 +125,6 @@ std::shared_ptr<Bohr::BohrNode> Bohr::BohrNode::FindTransition(char ch) {
 }
 
 void Bohr::AddPattern(std::string pattern, size_t divider_count) {
-    if (pattern.empty()) {
-        wordlist.emplace_back(pattern, divider_count);
-        return;
-    }
-
     auto current_node = root;
     for (size_t i = 0; i < pattern.length(); ++i) {
         auto neighbour_node = current_node->FindTransition(pattern[i]);
@@ -152,8 +149,8 @@ void Bohr::AddPattern(std::string pattern, size_t divider_count) {
     }
 }
 
-void Bohr::Init() {  // BFS
-    std::queue<std::shared_ptr<BohrNode>> bfs_queue;  // Куда пропали переходы?
+void Bohr::Init() {  // BFS // Тут херня с суфф ссылками
+    std::queue<std::shared_ptr<BohrNode>> bfs_queue;
     bfs_queue.push(root);
     while (!bfs_queue.empty()) {
         auto current_node = bfs_queue.front();
@@ -162,13 +159,17 @@ void Bohr::Init() {  // BFS
             const char ch = map_el.first;
             auto neighbour_node = map_el.second;
 
-            auto term_node = current_node->suff_link;
-            while (!term_node.lock()->is_root) {  // Суффиксные
-                if (term_node.lock()->FindTransition(ch) != nullptr) {
-                    neighbour_node->suff_link = term_node.lock()->FindTransition(ch);
+            auto temp_node = current_node->suff_link;
+            while (true) {  // Суффиксные
+                auto transition = temp_node.lock()->FindTransition(ch);
+                if (transition != nullptr && transition != neighbour_node) {
+                    neighbour_node->suff_link = transition;
                     break;
                 } else {
-                    term_node = term_node.lock()->suff_link;
+                    if (temp_node.lock()->is_root) {
+                        break;
+                    }
+                    temp_node = temp_node.lock()->suff_link;
                 }
             }
             if (neighbour_node->suff_link.lock() == nullptr) {
@@ -226,7 +227,7 @@ std::vector<size_t> Bohr::PatternSearch(const std::string& text) {  // Пров�
         }
 
         if (search_deque.front() == patterns_number) {  // Все слова из куска встретились
-            pattern_indexes.push_back(i);
+            pattern_indexes.push_back(i - pattern_size + 1);
         }
         search_deque.pop_front();
         search_deque.push_back(0);
