@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Z_Prefix_String.dir/main.cpp.o  -o Z_Prefix_String 
