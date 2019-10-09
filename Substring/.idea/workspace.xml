@@ -12,23 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7ab4e73-5cbe-4a9c-a30e-9ea23e376470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AhoCorasick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AhoCorasick/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/AhoCorasick" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/AhoCorasick" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AhoCorasick/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/CXX.includecache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/depend.internal" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Substring.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Substring.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Substring" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Substring" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,7 +40,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Industrial Programming Course/industrial-programming-course/onegin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -97,7 +88,18 @@
       <workItem from="1569494047699" duration="927000" />
       <workItem from="1569571232168" duration="677000" />
       <workItem from="1569580386833" duration="1813000" />
-      <workItem from="1569611230044" duration="1203000" />
+      <workItem from="1569611230044" duration="1709000" />
+      <workItem from="1569756953238" duration="599000" />
+      <workItem from="1569761866678" duration="33000" />
+      <workItem from="1569762724742" duration="11702000" />
+      <workItem from="1570016237559" duration="2550000" />
+      <workItem from="1570049706778" duration="1212000" />
+      <workItem from="1570108715485" duration="1214000" />
+      <workItem from="1570122734665" duration="599000" />
+      <workItem from="1570123468459" duration="11416000" />
+      <workItem from="1570318205769" duration="149000" />
+      <workItem from="1570318371322" duration="513000" />
+      <workItem from="1570548344241" duration="10393000" />
     </task>
     <servers />
   </component>
