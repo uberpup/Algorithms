@@ -63,14 +63,14 @@ int main() {
         if (pattern[i] == DIVIDER) {
             if (last_char != i) {
                 bohr.AddPattern(pattern.substr(last_char, i - last_char),
-                        divider_count);
+                                divider_count);
                 divider_count = 0;
             }
             ++divider_count;
             last_char = i + 1;
         } else if (i == pattern.length() - 1) {
             bohr.AddPattern(pattern.substr(last_char, i - last_char + 1),
-                    divider_count);
+                            divider_count);
             divider_count = 0;
         }
     }
@@ -101,7 +101,7 @@ Bohr::Bohr(): root(std::make_shared<BohrNode>()), wordlist(), pattern_size(0) {
 }
 
 Bohr::Bohr(size_t pattern_size): root(std::make_shared<BohrNode>()), wordlist(),
-        pattern_size(pattern_size) {
+                                 pattern_size(pattern_size) {
     root->suff_link = std::weak_ptr<BohrNode>(root);  // Спецификация полей под корень
     root->term_link = std::weak_ptr<BohrNode>(root);
     root->is_root = true;
@@ -109,10 +109,10 @@ Bohr::Bohr(size_t pattern_size): root(std::make_shared<BohrNode>()), wordlist(),
 
 bool Bohr::BohrNode::operator ==(const Bohr::BohrNode& rhv) {  // На всякий случай
     return transitions == rhv.transitions &&
-            suff_link.lock() == rhv.suff_link.lock() &&
-            term_link.lock() == rhv.term_link.lock() &&
-            is_terminal == rhv.is_terminal &&
-            is_root == rhv.is_root;
+           suff_link.lock() == rhv.suff_link.lock() &&
+           term_link.lock() == rhv.term_link.lock() &&
+           is_terminal == rhv.is_terminal &&
+           is_root == rhv.is_root;
 }
 
 std::shared_ptr<Bohr::BohrNode> Bohr::BohrNode::FindTransition(char ch) {
@@ -144,12 +144,12 @@ void Bohr::AddPattern(std::string pattern, size_t divider_count) {
         current_node->wordlist_idxs.push_back(wordlist.size());
         wordlist.emplace_back(pattern,
                               (!wordlist.empty() ?
-                              wordlist.back().second + pattern.length() :
-                              pattern.length()) + divider_count);
+                               wordlist.back().second + pattern.length() :
+                               pattern.length()) + divider_count);
     }
 }
 
-void Bohr::Init() {  // BFS // Тут херня с суфф ссылками
+void Bohr::Init() {  // BFS
     std::queue<std::shared_ptr<BohrNode>> bfs_queue;
     bfs_queue.push(root);
     while (!bfs_queue.empty()) {
@@ -207,7 +207,7 @@ void Bohr::Step(const char ch, std::shared_ptr<BohrNode>& current_node) {
     }
 }
 
-std::vector<size_t> Bohr::PatternSearch(const std::string& text) {  // Проверка вопросов в конце
+std::vector<size_t> Bohr::PatternSearch(const std::string& text) {
     std::vector<size_t> pattern_indexes;
     std::deque<size_t> search_deque(pattern_size);
     size_t patterns_number = wordlist.size();
