@@ -13,8 +13,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4ccba04b-197a-4df6-8aa7-c1f2230c47e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/a.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/AhoCorasick" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/AhoCorasick" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Substring/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Substring/.idea/workspace.xml" afterDir="false" />
@@ -88,6 +88,8 @@
       <workItem from="1570407748394" duration="4363000" />
       <workItem from="1570439324206" duration="58019000" />
       <workItem from="1570575897248" duration="1410000" />
+      <workItem from="1570625986132" duration="235000" />
+      <workItem from="1571746409203" duration="4015000" />
     </task>
     <servers />
   </component>
@@ -106,5 +108,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>226</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

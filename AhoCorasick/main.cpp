@@ -11,7 +11,7 @@
     log#Sigma - const, так что условие по требуемому времени не нарушается
  Память: O(m)
  */
-#pragma GCC optimize("Ofast,unroll-all-loops")
+//#pragma GCC optimize("Ofast,unroll-all-loops")
 #include <deque>
 #include <queue>
 #include <iostream>
@@ -42,18 +42,18 @@ public:
     std::shared_ptr<BohrNode> root;
 
     Bohr();
-    Bohr(size_t pattern_size);
-    void AddPattern(std::string pattern, size_t divider_count);
+    explicit Bohr(size_t pattern_size);
+    void AddPattern(const std::string& pattern, size_t divider_count);
     void Init();
-    void Step(const char ch, std::shared_ptr<BohrNode>& current_node);
-    std::vector<size_t> PatternSearch(const std::string& text);
+    void Step(char ch, std::shared_ptr<BohrNode>& current_node);
+    std::vector<size_t> PatternSearch(std::string& text, size_t extra_symbols);
     ~Bohr() = default;
 };
 
 int main() {
     std::string pattern;
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    //std::ios_base::sync_with_stdio(false);
+    //std::cin.tie(NULL);
     std::cin >> pattern;
     Bohr bohr(pattern.length());
 
@@ -78,13 +78,9 @@ int main() {
 
     std::string text;
     std::cin >> text;
-    if (divider_count) {  // Зачищаем вопросы в конце
-        text = text.substr(0, text.length() - divider_count);
-        bohr.pattern_size -= divider_count;
-    }
-    auto result = bohr.PatternSearch(text);
-    for (size_t i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << " ";
+    auto result = bohr.PatternSearch(text, divider_count); // Второй параметр - лишние вопросы в конце
+    for (auto& idx : result) {
+        std::cout << idx << " ";
     }
 
     return 0;
@@ -124,17 +120,17 @@ std::shared_ptr<Bohr::BohrNode> Bohr::BohrNode::FindTransition(char ch) {
     }
 }
 
-void Bohr::AddPattern(std::string pattern, size_t divider_count) {
+void Bohr::AddPattern(const std::string& pattern, size_t divider_count) {
     auto current_node = root;
-    for (size_t i = 0; i < pattern.length(); ++i) {
-        auto neighbour_node = current_node->FindTransition(pattern[i]);
+    for (const char& ch : pattern) {
+        auto neighbour_node = current_node->FindTransition(ch);
         if (neighbour_node == nullptr) {
             neighbour_node = std::make_shared<BohrNode>();
             if (current_node->is_root) {  // Первые символы ссылаются на корень
                 neighbour_node->suff_link = std::weak_ptr<BohrNode>(root);
                 neighbour_node->term_link = neighbour_node->suff_link;
             }
-            current_node->transitions[pattern[i]] = neighbour_node;
+            current_node->transitions[ch] = neighbour_node;
         }
         current_node = neighbour_node;
     }
@@ -207,7 +203,7 @@ void Bohr::Step(const char ch, std::shared_ptr<BohrNode>& current_node) {
     }
 }
 
-std::vector<size_t> Bohr::PatternSearch(const std::string& text) {
+std::vector<size_t> Bohr::PatternSearch(std::string& text, size_t extra_symbols) {  // Проверка вопросов в конце
     std::vector<size_t> pattern_indexes;
     std::deque<size_t> search_deque(pattern_size);
     size_t patterns_number = wordlist.size();
@@ -218,7 +214,7 @@ std::vector<size_t> Bohr::PatternSearch(const std::string& text) {
         auto additional_node = current_node;
         while (!additional_node->is_root) {
             if (additional_node->is_terminal) {
-                for (const auto& idx : additional_node->wordlist_idxs) {
+                for (auto& idx : additional_node->wordlist_idxs) {
                     // Вычитаем из размера расстояние до предполагаемого начала слова
                     ++search_deque[search_deque.size() - wordlist[idx].second];
                 }
@@ -226,7 +222,7 @@ std::vector<size_t> Bohr::PatternSearch(const std::string& text) {
             additional_node = additional_node->term_link.lock();
         }
 
-        if (search_deque.front() == patterns_number) {  // Все слова из куска встретились
+        if (search_deque.front() == patterns_number && i >= pattern_size - 1) {  // Все слова из куска встретились
             pattern_indexes.push_back(i - pattern_size + 1);
         }
         search_deque.pop_front();
