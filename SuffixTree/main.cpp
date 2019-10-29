@@ -10,11 +10,11 @@
  Память: O(n*|sigma|)
 */
 
+#include <array>
 #include <cstdio>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <array>
 
 const char DIVIDER0 = '$';
 const char DIVIDER1 = '#';
@@ -31,12 +31,10 @@ public:
         size_t start;
         size_t end;
         size_t suff_link;
-        size_t transitions[CHARSIZE];
         size_t number;
-        size_t search_number;
+        size_t transitions[CHARSIZE];
 
         static size_t position;
-        bool visited;
 
         size_t edge_length() {
             return std::min(end - start, position - start);
@@ -57,13 +55,13 @@ public:
         ~ActivePoint() = default;
     };
 
-    void AddSuffLink(Node from);
+    void AddSuffLink(const Node& from);
 
     void Descent(size_t node_number);
 
     void Insert(char ch);
 
-    void Add(Node node);
+    void Add(Node& node);
 
     size_t NodeCount();
 
@@ -83,13 +81,6 @@ private:
     std::vector<Node> nodes;
     std::vector<std::array<size_t,4>> data;
 };
-/*
- Проблемы:
-    Старт неправильно индексуется (у вершины равен её номеру) UPD, у всех start = 0
-    Количество узлов на 1 меньше нужного
-    Сегфолт во время заполнения data
- */
-
 
 int main() {
     std::string s;
@@ -115,8 +106,9 @@ SuffixTree::SuffixTree(const std::string& str): SuffixTree() {
         txt.push_back(ch);
         Insert(ch);
         if (ch == DIVIDER0) {
-            last_in_s = nodes.size();
+            last_in_s = txt.size() - 1;
         }
+        ++SuffixTree::Node::position;
     }
 }
 
@@ -127,37 +119,39 @@ SuffixTree::ActivePoint::ActivePoint(): node(), edge(0), len(0) {}
 SuffixTree::ActivePoint::ActivePoint(Node root): node(root), edge(0), len(0) {}
 
 SuffixTree::Node::Node(): start(0), end(UINT64_MAX), suff_link(0),
-        number(-1), transitions(), search_number(0), visited(false) {}
+        number(0), transitions() {}
 
 SuffixTree::Node::Node(size_t start, size_t end = UINT64_MAX): start(start), end(end),
-        suff_link(0), number(-1), transitions(), search_number(0), visited(false) {}
+        suff_link(0), number(0), transitions() {}
 
-void SuffixTree::AddSuffLink(Node from) {
+void SuffixTree::AddSuffLink(const Node& from) {
     if (last.number) {
         nodes[last.number].suff_link = from.number;
     }
-    last = from;
+    last = root;
 }
 
-void SuffixTree::Descent(size_t node_number) {
+void SuffixTree::Descent(size_t node_number) {  // Спуск по ребру
     point.edge += nodes[node_number].edge_length();
     point.len -= nodes[node_number].edge_length();
     point.node.number = node_number;
 }
 
-void SuffixTree::Add(Node node) {
+void SuffixTree::Add(Node& node) {
     nodes.push_back(node);
     node.number = nodes.size() - 1;
 }
 
 void SuffixTree::Insert(char ch) {
     ++remainder;
+    last = root;
     while (remainder) {
+
         if (!point.len) {
             point.edge = SuffixTree::Node::position;
         }
 
-        if (!nodes[point.node.number].transitions[txt[point.edge]]) {  // Rule #2
+        if (!nodes[point.node.number].transitions[txt[point.edge]]) {  // Правило #2
 
             Node leaf(SuffixTree::Node::position);
             Add(leaf);
@@ -195,11 +189,11 @@ void SuffixTree::Insert(char ch) {
 
         --remainder;
 
-        if (point.node == root && point.len) {        // Rule #1
+        if (point.node == root && point.len) {        // Правило #1
             --point.len;
             point.edge = SuffixTree::Node::position - remainder + 1;
-        } else {                                     // Rule #3                                        //!
-            point.node = nodes[point.node.number].suff_link;
+        } else if (point.node.number) {               // Правило #3
+            point.node = nodes[nodes[point.node.number].suff_link];
         }
     }
 }
@@ -210,38 +204,38 @@ size_t SuffixTree::NodeCount() {
 
 std::vector<std::array<size_t,4>> SuffixTree::NodeData() {
     size_t counter = 0;
-    data.reserve(NodeCount());
-    for (size_t i = 1; i <= NodeCount(); ++i) {
-        if (!nodes[i].visited) {                //?
-            Search(i, 0, counter);
+    data.resize(NodeCount() - 1);
+    for (auto& transition : nodes[0].transitions) {
+        if (transition) {
+            Search(transition, 0, counter);
         }
     }
     return data;
 }
 
 void SuffixTree::Search(size_t node_number, size_t parent_number, size_t& counter) {
-    nodes[node_number].visited = true;
-    nodes[node_number].search_number = counter;
-    data[counter][0] = nodes[parent_number].search_number;
+    nodes[node_number].number = counter + 1;
+    data[counter][0] = nodes[parent_number].number;
+
     if (nodes[node_number].end >= txt.size()) {
         nodes[node_number].end = txt.size() - 1;
     }
 
-    if (nodes[node_number].number > last_in_s) {
+    if (nodes[node_number].start <= last_in_s) {
         data[counter][1] = 0;   // s
         data[counter][2] = nodes[node_number].start;
-        data[counter][3] = nodes[node_number].end;
+        data[counter][3] = std::min(nodes[node_number].end, last_in_s + 1);
     } else {
         data[counter][1] = 1;   // t
         data[counter][2] = nodes[node_number].start - last_in_s - 1;
-        data[counter][3] = nodes[node_number].end - last_in_s - 1;
+        data[counter][3] = nodes[node_number].end - last_in_s;
     }
 
     ++counter;
 
-    for (size_t i = 0; i < NodeCount(); ++i) {
-        if (!nodes[node_number].transitions[i]) {
-            Search(nodes[node_number].transitions[i], node_number, counter);
+    for (auto& transition : nodes[node_number].transitions) {
+        if (transition) {
+            Search(transition, node_number, counter);
         }
     }
 }
