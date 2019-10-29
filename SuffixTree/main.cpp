@@ -110,7 +110,6 @@ SuffixTree::SuffixTree() : nodes(), txt(),
                            remainder(0), root(), last(root), point(root) {}
 
 SuffixTree::SuffixTree(const std::string& str): SuffixTree() {
-    --SuffixTree::Node::node_count;     // root не считаем
     nodes.push_back(root);
     for (char ch : str) {
         txt.push_back(ch);
