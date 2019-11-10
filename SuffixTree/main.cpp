@@ -229,12 +229,15 @@ std::vector<std::array<int, 4>> SuffixTree::NodeData() {
 
 void SuffixTree::Search(int node_number, int parent_number, int& counter) {
     nodes[node_number].number = counter + 1;
-    data[counter][0] = nodes[parent_number].number;
+    data[counter][0] = nodes[parent_number].number;     // data[][0] - parent of current Node
 
     if (nodes[node_number].end >= txt.size()) {
         nodes[node_number].end = txt.size() - 1;
     }
 
+    // data[][1] - number of string, which has current suffix
+    // data[][2] - starting position in that string
+    // data[][3] - final position
     if (nodes[node_number].start <= last_in_s) {
         data[counter][1] = 0;   // s
         data[counter][2] = nodes[node_number].start;
