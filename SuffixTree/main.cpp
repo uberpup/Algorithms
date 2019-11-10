@@ -27,9 +27,9 @@ public:
 
     struct Node {   // [start; end]
         Node();
-        Node(int start, int end);
-        Node(int start, int end, int suff_link);
-        Node(int start, int end, int suff_link, int number);
+        //Node(int start, int end, int suff_link, int number);
+        Node(int start, int end = INT32_MAX,
+             int suff_link = 0, int number = 0);
         int start;
         int end;
         int suff_link;
@@ -126,15 +126,9 @@ SuffixTree::ActivePoint::ActivePoint(Node root): node(root), edge(0), len(0) {}
 SuffixTree::Node::Node(): start(0), end(INT32_MAX), suff_link(0),
         number(0), transitions() {}
 
-SuffixTree::Node::Node(int start, int end = INT32_MAX): start(start), end(end),
-        suff_link(0), number(0), transitions() {}
-
-SuffixTree::Node::Node(int start, int end, int suff_link):
-        start(start), end(end), suff_link(suff_link), number(0), transitions() {}
-
-SuffixTree::Node::Node(int start, int end, int suff_link,
-        int number) : start(start), end(end), suff_link(suff_link),
-        number(number), transitions() {}
+SuffixTree::Node::Node(int start, int end,
+        int suff_link, int number): start(start), end(end),
+        suff_link(suff_link), number(number), transitions() {}
 
 void SuffixTree::AddSuffLink(const Node& from) {
     if (last.number > -1) {
