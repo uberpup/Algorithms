@@ -101,9 +101,8 @@ int main() {
 }
 
 
-SuffixTree::SuffixTree() : nodes(), txt(),
-                           remainder(0), root(-1, -1, -1), last(root),
-                           point(root), dead_node(-1,-1,-1,-1) {}
+SuffixTree::SuffixTree() : root(-1, -1, -1), point(root), nodes(), last(root),
+        txt(), dead_node(-1,-1,-1,-1), remainder(0) {}
 
 SuffixTree::SuffixTree(const std::string& str): SuffixTree() {
     nodes.push_back(root);
