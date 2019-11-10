@@ -27,7 +27,6 @@ public:
 
     struct Node {   // [start; end]
         Node();
-        //Node(int start, int end, int suff_link, int number);
         Node(int start, int end = INT32_MAX,
              int suff_link = 0, int number = 0);
         int start;
