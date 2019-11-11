@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/SegmentsDistance/main.cpp
+iostream
+-
+ctgmath
+-
+iomanip
+-
+

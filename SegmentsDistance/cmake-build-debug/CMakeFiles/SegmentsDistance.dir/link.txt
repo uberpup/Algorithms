@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/SegmentsDistance.dir/main.cpp.o  -o SegmentsDistance 
