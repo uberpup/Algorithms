@@ -35,9 +35,7 @@ public:
         int number;
         int transitions[ALPHASIZE];
 
-        static int position;
-
-        int edge_length() {
+        int edge_length(int position) {
             return std::min(end - start, position - start) + 1;
         }
 
@@ -67,6 +65,8 @@ public:
 
     int NodeCount();
 
+    int GetPosition();
+
     std::vector<std::array<int, 4>> NodeData();
 
     void Search(int node_number, int parent_number, int& counter);
@@ -80,6 +80,9 @@ private:
     Node dead_node;
     int remainder;
     int last_in_s;
+
+    int position = 0;
+
     std::vector<char> txt;
     std::vector<Node> nodes;
     std::vector<std::array<int, 4>> data;
@@ -101,7 +104,7 @@ int main() {
 
 
 SuffixTree::SuffixTree() : root(-1, -1, -1), point(root), nodes(), last(root),
-        txt(), dead_node(-1,-1,-1,-1), remainder(0) {}
+        txt(), dead_node(-1,-1,-1,-1), remainder(0), position(0) {}
 
 SuffixTree::SuffixTree(const std::string& str): SuffixTree() {
     nodes.push_back(root);
@@ -111,11 +114,9 @@ SuffixTree::SuffixTree(const std::string& str): SuffixTree() {
         if (ch == DIVIDER0) {
             last_in_s = txt.size() - 1;
         }
-        ++SuffixTree::Node::position;
+        ++position;
     }
 }
-
-int SuffixTree::Node::position = 0;      // Изначально в root
 
 SuffixTree::ActivePoint::ActivePoint(): node(), edge(0), len(0) {}
 
@@ -143,8 +144,8 @@ void SuffixTree::AddSuffLink(const Node& from, const Node& to) {
 }
 
 void SuffixTree::Descent(int node_number) {  // Спуск по ребру
-    point.edge += nodes[node_number].edge_length();
-    point.len -= nodes[node_number].edge_length();
+    point.edge += nodes[node_number].edge_length(position);
+    point.len -= nodes[node_number].edge_length(position);
     point.node.number = node_number;
 }
 
@@ -159,12 +160,12 @@ void SuffixTree::Insert(char ch) {
     while (remainder) {
 
         if (!point.len) {
-            point.edge = SuffixTree::Node::position;
+            point.edge = position;
         }
 
         if (!nodes[point.node.number].transitions[txt[point.edge]]) {  // Правило #2
 
-            Node leaf(SuffixTree::Node::position);
+            Node leaf(position);
             Add(leaf);
             nodes[point.node.number].transitions[txt[point.edge]] = leaf.number;
             AddSuffLink(point.node);
@@ -172,7 +173,7 @@ void SuffixTree::Insert(char ch) {
         } else {
             int next = nodes[point.node.number].transitions[txt[point.edge]];
 
-            if (point.len >= nodes[next].edge_length()) {
+            if (point.len >= nodes[next].edge_length(position)) {
                 Descent(next);
                 continue;
             }
@@ -190,7 +191,7 @@ void SuffixTree::Insert(char ch) {
             Add(split);
             nodes[point.node.number].transitions[txt[point.edge]] = split.number;
 
-            Node leaf = Node(SuffixTree::Node::position);
+            Node leaf = Node(position);
             Add(leaf);
             nodes[split.number].transitions[ch] = leaf.number;
 
@@ -204,7 +205,7 @@ void SuffixTree::Insert(char ch) {
 
         if (!point.node.number && point.len) {        // Правило #1
             --point.len;
-            point.edge = SuffixTree::Node::position - remainder + 1;
+            point.edge = position - remainder + 1;
         } else if (point.node.number) {               // Правило #3
             point.node = nodes[nodes[point.node.number].suff_link];
         }
@@ -213,6 +214,10 @@ void SuffixTree::Insert(char ch) {
 
 int SuffixTree::NodeCount() {
     return nodes.size();
+}
+
+int SuffixTree::GetPosition() {
+    return position;
 }
 
 std::vector<std::array<int, 4>> SuffixTree::NodeData() {
