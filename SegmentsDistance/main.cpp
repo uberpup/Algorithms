@@ -16,14 +16,14 @@ struct PointR3 {
     double z;
 
     PointR3 operator + (const PointR3& rhv) {
-        PointR3 result {};
+        PointR3 result;
         result.x = x + rhv.x;
         result.y = y + rhv.y;
         result.z = z + rhv.z;
         return result;
     }
     PointR3 operator / (double rhv) {
-        PointR3 result {};
+        PointR3 result;
         result.x = x / rhv;
         result.y = y / rhv;
         result.z = z / rhv;
