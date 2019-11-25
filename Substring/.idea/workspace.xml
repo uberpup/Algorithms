@@ -13,14 +13,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ab4e73-5cbe-4a9c-a30e-9ea23e376470" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../AhoCorasick/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AhoCorasick/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/a.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/AhoCorasick" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/AhoCorasick" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AhoCorasick/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../AhoCorasick/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Substring.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Substring" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Substring" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +93,9 @@
       <workItem from="1570123468459" duration="11416000" />
       <workItem from="1570318205769" duration="149000" />
       <workItem from="1570318371322" duration="513000" />
-      <workItem from="1570548344241" duration="10393000" />
+      <workItem from="1570548344241" duration="11306000" />
+      <workItem from="1570625986368" duration="604000" />
+      <workItem from="1570780111401" duration="66000" />
     </task>
     <servers />
   </component>

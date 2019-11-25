@@ -13,10 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4ccba04b-197a-4df6-8aa7-c1f2230c47e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/AhoCorasick" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/AhoCorasick" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/AhoCorasick.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Substring/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Substring/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,7 +32,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Industrial Programming Course/industrial-programming-course/Akinator_mipt" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -90,6 +86,11 @@
       <workItem from="1570575897248" duration="1410000" />
       <workItem from="1570625986132" duration="235000" />
       <workItem from="1571746409203" duration="4015000" />
+      <workItem from="1571777343037" duration="730000" />
+      <workItem from="1572256879970" duration="4329000" />
+      <workItem from="1573816386542" duration="599000" />
+      <workItem from="1573823477572" duration="1832000" />
+      <workItem from="1573833341220" duration="18000" />
     </task>
     <servers />
   </component>
@@ -108,16 +109,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>226</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
