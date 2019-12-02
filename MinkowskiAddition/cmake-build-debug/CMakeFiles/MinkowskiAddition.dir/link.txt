@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/MinkowskiAddition.dir/main.cpp.o  -o MinkowskiAddition 

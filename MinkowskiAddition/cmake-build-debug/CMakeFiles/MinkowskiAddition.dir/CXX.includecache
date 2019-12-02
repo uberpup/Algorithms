@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/MinkowskiAddition/main.cpp
+algorithm
+-
+ctgmath
+-
+iomanip
+-
+iostream
+-
+vector
+-
+tuple
+-
+
