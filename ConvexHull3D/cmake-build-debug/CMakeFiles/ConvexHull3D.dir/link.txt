@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/ConvexHull3D.dir/main.cpp.o  -o ConvexHull3D 
