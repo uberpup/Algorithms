@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/VoronoiDiagram/main.cpp
+algorithm
+-
+cmath
+-
+iostream
+-
+list
+-
+vector
+-
+tuple
+-
+iomanip
+-
+

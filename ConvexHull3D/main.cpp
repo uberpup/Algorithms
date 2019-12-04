@@ -33,6 +33,9 @@ struct PointR3 {
             prev(nullptr), next(nullptr) {};
     PointR3(double x, double y, double z, PointR3* prev, PointR3* next) : x(x),
             y(y), z(z), prev(prev), next(next) {};
+    PointR3(double x, double y, double z, int id, PointR3* prev, PointR3* next) :
+            x(x), y(y), z(z), id(id), prev(prev), next(next) {};
+
     double x;
     double y;
     double z;
@@ -78,15 +81,11 @@ struct Hull {
                 return std::tie(first.x, first.y, first.z) <
                         std::tie(second.x, second.y, second.z); });
     };
+
     std::vector<Facet> facets;
 };
 
-void Rotate(double& coord_1, double& coord_2, double angle) {
-    double coord_1_new = coord_1 * cos(angle) + coord_2 * sin(angle);
-    double coord_2_new = -coord_1 * sin(angle) + coord_2 * cos(angle);
-    coord_1 = coord_1_new;
-    coord_2 = coord_2_new;
-}
+void Rotate(double& coord_1, double& coord_2, const double angle);
 
 double Turn(const PointR3& p, const PointR3& q, const PointR3& r);
 
@@ -115,10 +114,10 @@ struct PointSet {
             point.next = nullptr;
         }
     }
-    void FillPointers();
     Hull MakeConvexHull();
     std::vector<PointR3> points;
 };
+
 
 int main() {
     size_t tests;
@@ -143,6 +142,14 @@ int main() {
     return 0;
 }
 
+
+void Rotate(double& coord_1, double& coord_2, const double angle) {
+    double coord_1_new = coord_1 * cos(angle) + coord_2 * sin(angle);
+    double coord_2_new = -coord_1 * sin(angle) + coord_2 * cos(angle);
+    coord_1 = coord_1_new;
+    coord_2 = coord_2_new;
+}
+
 double Turn(const PointR3& p, const PointR3& q, const PointR3& r) {
     return (q.x - p.x) * (r.y - p.y) - (r.x - p.x) * (q.y - p.y);
 }
@@ -161,6 +168,7 @@ double Time(const PointR3& p, const PointR3& q, const PointR3& r) {
     return ((q.x - p.x) * (r.z - p.z) - (r.x - p.x) * (q.z - p.z)) /
            Turn(p, q, r);
 }
+
 double Time(const PointR3* p, const PointR3* q, const PointR3* r) {
     if (p == null_event || q == null_event || r == null_event) {
         return inf;
@@ -169,20 +177,6 @@ double Time(const PointR3* p, const PointR3* q, const PointR3* r) {
         return inf;
     }
     return Time(*p, *q, *r);
-}
-
-void PointSet::FillPointers() {
-    if (points.size() <= 1) {
-        return;
-    }
-    points[0].next = &points[1];
-    for (size_t i = 1; i < points.size() - 1; ++i) {
-        points[i].prev = &points[i - 1];
-        points[i].next = &points[i + 1];
-    }
-    if (points.size() >= 2) {
-        points.back().prev = &points[points.size() - 2];
-    }
 }
 
 Hull PointSet::MakeConvexHull() {

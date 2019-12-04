@@ -24,6 +24,9 @@ struct PointR3 {
                                                     prev(nullptr), next(nullptr) {};
     PointR3(double x, double y, double z, PointR3* prev, PointR3* next) : x(x),
                                                                           y(y), z(z), prev(prev), next(next) {};
+    PointR3(double x, double y, double z, int id, PointR3* prev, PointR3* next) :
+            x(x), y(y), z(z), id(id), prev(prev), next(next) {};
+
     double x;
     double y;
     double z;
@@ -73,12 +76,7 @@ struct Hull {
     std::vector<Facet> facets;
 };
 
-void Rotate(double& coord_1, double& coord_2, double angle) {
-    double coord_1_new = coord_1 * cos(angle) + coord_2 * sin(angle);
-    double coord_2_new = -coord_1 * sin(angle) + coord_2 * cos(angle);
-    coord_1 = coord_1_new;
-    coord_2 = coord_2_new;
-}
+void Rotate(double& coord_1, double& coord_2, const double angle);
 
 double Turn(const PointR3& p, const PointR3& q, const PointR3& r);
 
@@ -114,6 +112,7 @@ struct PointSet {
     std::vector<size_t> degrees;
 };
 
+
 int main() {
     size_t points_count = 0;
     PointSet ps;
@@ -132,6 +131,14 @@ int main() {
     std::cout <<  std::setprecision(6) << std::fixed <<
               ps.AverageVoronoiPolygons() << std::endl;
     return 0;
+}
+
+
+void Rotate(double& coord_1, double& coord_2, const double angle) {
+    double coord_1_new = coord_1 * cos(angle) + coord_2 * sin(angle);
+    double coord_2_new = -coord_1 * sin(angle) + coord_2 * cos(angle);
+    coord_1 = coord_1_new;
+    coord_2 = coord_2_new;
 }
 
 double Turn(const PointR3& p, const PointR3& q, const PointR3& r) {
