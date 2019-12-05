@@ -56,7 +56,7 @@ struct Polygon {
 
 bool DoIntersect(Polygon poly, Polygon contr_poly);     // Does the addition contain (0, 0)
 
-bool IsInside(PointR2 point, const Polygon& poly);
+bool IsInside(const PointR2& point, const Polygon& poly);
 
 int CompareAngles(const PointR2& x0, const PointR2& y0, const PointR2& x1, const PointR2& y1);
 
@@ -87,7 +87,7 @@ int main() {
     return 0;
 }
 
-bool IsInside(PointR2 point, const Polygon& poly) {
+bool IsInside(const PointR2& point, const Polygon& poly) {
     double det;
     for (size_t i = 0; i < poly.vertices.size() - 1; ++i) {
         det = poly.vertices[i].x * poly.vertices[i + 1].y -
@@ -101,7 +101,8 @@ bool IsInside(PointR2 point, const Polygon& poly) {
     return !(det < -eps);
 }
 
-int CompareAngles(const PointR2& x0, const PointR2& y0, const PointR2& x1, const PointR2& y1) {
+int CompareAngles(const PointR2& x0, const PointR2& y0, const PointR2& x1,
+        const PointR2& y1) {
     PointR2 first = y0 - x0;
     PointR2 second = x1 - y1;
     double det = first.x * second.y - second.x * first.y;
@@ -128,7 +129,8 @@ bool DoIntersect(Polygon poly, Polygon contr_poly) {
     while (i < poly.vertices_count && j < contr_poly.vertices_count) {
         summed_poly.vertices.push_back(poly.vertices[i] + contr_poly.vertices[j]);
         int result = CompareAngles(poly.vertices[i], poly.vertices[i + 1],
-                                   contr_poly.vertices[j], contr_poly.vertices[j + 1]);
+                                   contr_poly.vertices[j],
+                                   contr_poly.vertices[j + 1]);
         if (result == 1) {
             ++j;
         } else if (result == -1) {
@@ -143,7 +145,8 @@ bool DoIntersect(Polygon poly, Polygon contr_poly) {
 }
 
 void CyclicShift(std::vector<PointR2>& vector) {
-    size_t dist = std::distance(vector.begin(), std::min_element(vector.begin(), vector.end(),
+    size_t dist = std::distance(vector.begin(),
+            std::min_element(vector.begin(), vector.end(),
             [](const PointR2& first, const PointR2& second) {
                     return std::tie(first.y, first.x) <
                             std::tie(second.y, second.x); }));
