@@ -27,6 +27,15 @@ const double cmp_eps = 1e-9;
 const double inf = std::numeric_limits<double>::infinity();
 const int EVENTS = 6;
 
+enum PositioningCases {
+    POINT_LEFT_OF_u = 0,
+    POINT_RIGHT_OF_v = 1,
+    BRIDGE_Uleft_V = 2,
+    BRIDGE_Uright_V = 3,
+    BRIDGE_U_Vright = 4,
+    BRIDGE_U_Vleft = 5
+};
+
 bool IsEqual(const double first, const double second) {
     return std::abs(first - second) <= cmp_eps;
 }
@@ -286,33 +295,33 @@ std::vector<PointR3*> GetEvents(std::vector<PointR3>& points,
         }
 
         switch (new_time_idx) {
-            case 0:
+            case POINT_LEFT_OF_u:
                 if (u->x - left_point->x > cmp_eps) {
                     events.push_back(left_point);
                 }
                 left_point->Act();
                 event_1++;
                 break;
-            case 1:
+            case POINT_RIGHT_OF_v:
                 if (right_point->x - v->x > cmp_eps) {
                     events.push_back(right_point);
                 }
                 right_point->Act();
                 event_2++;
                 break;
-            case 2:
+            case BRIDGE_Uleft_V:
                 events.push_back(v);
                 v = v->next;
                 break;
-            case 3:
+            case BRIDGE_Uright_V:
                 v = v->prev;
                 events.push_back(v);
                 break;
-            case 4:
+            case BRIDGE_U_Vright:
                 events.push_back(u);
                 u = u->prev;
                 break;
-            case 5:
+            case BRIDGE_U_Vleft:
                 u = u->next;
                 events.push_back(u);
                 break;
