@@ -15,15 +15,21 @@
  */
 
 #include <algorithm>
+#include <cassert>
 #include <ctgmath>
 #include <iostream>
 #include <list>
-#include <vector>
 #include <tuple>
+#include <vector>
 
-const double eps = 1e-3;
+const double rot_eps = 1e-3;
+const double cmp_eps = 1e-9;
 const double inf = std::numeric_limits<double>::infinity();
 const int EVENTS = 6;
+
+bool IsEqual(const double first, const double second) {
+    return std::abs(first - second) <= cmp_eps;
+}
 
 struct PointR3 {
     PointR3() = default;
@@ -102,9 +108,9 @@ std::vector<PointR3*> GetEvents(std::vector<PointR3>& points,
 
 struct PointSet {
     void RotateAndAdd(double x, double y, double z, int id) {
-        Rotate(z, y, eps);
-        Rotate(x, z, eps);
-        Rotate(x, y, eps);
+        Rotate(z, y, rot_eps);
+        Rotate(x, z, rot_eps);
+        Rotate(x, y, rot_eps);
         points.emplace_back(x, y, z, id);
     };
     void FlipZ() {
@@ -144,8 +150,10 @@ int main() {
 
 
 void Rotate(double& coord_1, double& coord_2, const double angle) {
-    double coord_1_new = coord_1 * cos(angle) + coord_2 * sin(angle);
-    double coord_2_new = -coord_1 * sin(angle) + coord_2 * cos(angle);
+    double cos_ = cos(angle);
+    double sin_ = sin(angle);
+    double coord_1_new = coord_1 * cos_ + coord_2 * sin_;
+    double coord_2_new = -coord_1 * sin_ + coord_2 * cos_;
     coord_1 = coord_1_new;
     coord_2 = coord_2_new;
 }
@@ -184,7 +192,6 @@ Hull PointSet::MakeConvexHull() {
                      [](const PointR3& first, const PointR3& second) {
                          return std::tie(first.x, first.y, first.z) <
                                 std::tie(second.x, second.y, second.z); });
-    //FillPointers();
     Hull res_hull;
     HalfHull(points, res_hull, true);
     FlipZ();
@@ -267,7 +274,8 @@ std::vector<PointR3*> GetEvents(std::vector<PointR3>& points,
         size_t new_time_idx = EVENTS + 1;
         double new_time = inf;
         for (int i = 0; i < EVENTS; i++) {
-            if (event_time[i] > cur_time && event_time[i] < new_time) {
+            if (event_time[i] - cur_time > cmp_eps &&
+                    new_time - event_time[i] > cmp_eps) {
                 new_time = event_time[i];
                 new_time_idx = i;
             }
@@ -279,14 +287,14 @@ std::vector<PointR3*> GetEvents(std::vector<PointR3>& points,
 
         switch (new_time_idx) {
             case 0:
-                if (left_point->x < u->x) {
+                if (u->x - left_point->x > cmp_eps) {
                     events.push_back(left_point);
                 }
                 left_point->Act();
                 event_1++;
                 break;
             case 1:
-                if (right_point->x > v->x) {
+                if (right_point->x - v->x > cmp_eps) {
                     events.push_back(right_point);
                 }
                 right_point->Act();
@@ -309,7 +317,7 @@ std::vector<PointR3*> GetEvents(std::vector<PointR3>& points,
                 events.push_back(u);
                 break;
             default:
-                std::cout << "How did you manage to get here?" << std::endl;
+                assert(false);
                 break;
         }
         cur_time = new_time;
@@ -320,12 +328,12 @@ std::vector<PointR3*> GetEvents(std::vector<PointR3>& points,
     // Updating pointers by reverse traverse
     for (auto i = static_cast<int64_t>(events.size() - 1); i >= 0; --i) {
         PointR3* event = events[i];
-        if (event->x > u->x && event->x < v->x) {
+        if (event->x - u->x > cmp_eps && v->x - event->x > cmp_eps) {
             u->next = event;
             v->prev = event;
             event->prev = u;
             event->next = v;
-            if (event->x <= points[middle_idx - 1].x) {
+            if (points[middle_idx - 1].x - event->x < cmp_eps) {
                 u = event;
             } else {
                 v = event;
