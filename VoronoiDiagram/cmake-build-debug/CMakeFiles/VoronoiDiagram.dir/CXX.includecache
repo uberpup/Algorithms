@@ -9,6 +9,8 @@
 /home/vladimir/CLionProjects/Algorithms course/Algorithms/VoronoiDiagram/main.cpp
 algorithm
 -
+cassert
+-
 cmath
 -
 iostream
