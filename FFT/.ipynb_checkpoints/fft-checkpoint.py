@@ -1,63 +1,54 @@
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 
-def fft(a, inverse=False):
 
-    x = np.asarray(x, dtype=float)
-    N = x.shape[0]
-    if (!inverse):
-        return np.fft(x, N)
-    else:
-        return np.ifft(x, N)
-'''
-    if np.log2(N) % 1 > 0:
+def analyze_fft(f, title="", D=0):
+    # test(f, "original " + title)
+    x = discretization(10, 10/100)
+    plot(x, f(x), "original " + title)
+    g = fft(f(x))
+    g = g[:int(len(g) * (1 - D))]
+    e = fft(g, inverse=True)[:100]
+    x = np.ndarray.tolist(x)
+    e = np.ndarray.tolist(e)
+    plot(x, e, "fourier-transformed " + title, D)
+
+
+def fft(a, inverse=False, first_iteration=True):
+    if len(a) == 1:
+        return a
+    c = int(math.pow(2, (math.ceil(math.log2(len(a)))))) - len(a)
+    a = np.append(a, [0] * c)
+    # if not inverse:
+    a = np.asarray(a, dtype=complex)
+    n = a.shape[0]
+    n_arr = np.arange(1, n // 2 + 1, 1)
+    if n % 2 > 0 and n != 1:
         raise ValueError("size of x must be a power of 2")
+    A_even = fft(a[::2], inverse, first_iteration=False)
+    A_odd = fft(a[1::2], inverse, first_iteration=False)
+    angle = 2 * np.pi * (-1 if inverse else 1) / n
+    root = complex(math.cos(angle), math.sin(angle))
+    factor = np.array([root ** i for i in range(n//2)])
+    return np.concatenate([(A_even + A_odd * factor) / (n if (inverse and first_iteration) else 1),
+                           (A_even - A_odd * factor) / (n if (inverse and first_iteration) else 1)])
 
-    # N_min here is equivalent to the stopping condition above,
-    # and should be a power of 2
-    N_min = min(N, 32)
-    
-    # Perform an O[N^2] DFT on all length-N_min sub-problems at once
-    n = np.arange(N_min)
-    k = n[:, None]
-    M = np.exp(-2j * np.pi * n * k / N_min)
-    X = np.dot(M, x.reshape((N_min, -1)))
 
-    # build-up each level of the recursive calculation all at once
-    while X.shape[0] < N:
-        X_even = X[:, :X.shape[1] / 2]
-        X_odd = X[:, X.shape[1] / 2:]
-        factor = np.exp(-1j * np.pi * np.arange(X.shape[0])
-                        / X.shape[0])[:, None]
-        X = np.vstack([X_even + factor * X_odd,
-                       X_even - factor * X_odd]) 
-
-    return X.ravel() '''
-
-def discretization(f, To, Step):
+def discretization(To, Step):
     A = np.arange(0, To, Step)
-    return f(A)
+    return A
 
-def test(f, coefficients_deleted=0):
-    #и тут код
-    xs = np.linspace(0, 10, 100);
-    plt.plot(xs, f(xs));
-#     print(np.sin(xs))
-#     print(xs)
+
+def plot(x, y, title="", coefficients_deleted=0):
+    plt.title(title)
+    plt.scatter(x, y, s=7)
     plt.grid(True)
     plt.show()
 
-'''тут новая ячейка, начинаем тестить
-   тестим примерно так:
-   f = lambda x: x
-   test(f, 0)
-   для каждой функции делаем по 3+ графиков и какой-то вывод про D после (см. задание)
-   текстовые вставки делаем отдельными ячейками, выбирая Markdown вместо Code!!!'''
 
-f = lambda x: x
-test(f)
-g = fft(discretization(f, 100, 2.5))
-e = fft(g, True)
-test(e)
-# Change part of dots
-
+analyze_fft(lambda x: x)
+analyze_fft(lambda x: x * x)
+analyze_fft(lambda x: np.sin(x))
+analyze_fft(lambda x: np.sin(x) / (x + 1e-12))
+analyze_fft(lambda x: np.sin(x * x))
