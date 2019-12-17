@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 
 
 def analyze_fft(f, title="", D=0):
-    # test(f, "original " + title)
     x = discretization(10, 10/100)
     plot(x, f(x), "original " + title)
     g = fft(f(x))
