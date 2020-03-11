@@ -13,7 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4ccba04b-197a-4df6-8aa7-c1f2230c47e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Substring/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Substring/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +31,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Industrial Programming Course/industrial-programming-course/Akinator_mipt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -91,6 +90,7 @@
       <workItem from="1573816386542" duration="599000" />
       <workItem from="1573823477572" duration="1832000" />
       <workItem from="1573833341220" duration="18000" />
+      <workItem from="1574759657786" duration="1211000" />
     </task>
     <servers />
   </component>

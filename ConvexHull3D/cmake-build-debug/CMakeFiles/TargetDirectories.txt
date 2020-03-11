@@ -1,0 +1,3 @@
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/ConvexHull3D/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/ConvexHull3D/cmake-build-debug/CMakeFiles/ConvexHull3D.dir
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/ConvexHull3D/cmake-build-debug/CMakeFiles/edit_cache.dir

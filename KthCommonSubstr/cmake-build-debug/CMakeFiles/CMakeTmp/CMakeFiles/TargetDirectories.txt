@@ -1,0 +1,3 @@
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/KthCommonSubstr/cmake-build-debug/CMakeFiles/CMakeTmp/CMakeFiles/rebuild_cache.dir
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/KthCommonSubstr/cmake-build-debug/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_4a7a0.dir
+/home/vladimir/CLionProjects/Algorithms course/Algorithms/KthCommonSubstr/cmake-build-debug/CMakeFiles/CMakeTmp/CMakeFiles/edit_cache.dir
